@@ -10,6 +10,7 @@ const CONFIG_NAME: &str = "config.yml";
 
 #[derive(Serialize, Deserialize, Debug)]
 pub(crate) struct Config {
+    pub(crate) timezone: String,
     pub(crate) discord_token: String,
     pub(crate) discord_guild_id: u64,
     pub(crate) steam_status_discord_channel_id: u64,
@@ -30,6 +31,7 @@ lazy_static! {
         }
 
         let config = Config {
+            timezone: "UTC".to_string(),
             discord_token: "".to_string(),
             discord_guild_id: 0,
             steam_status_discord_channel_id: 0,

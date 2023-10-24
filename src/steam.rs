@@ -1,7 +1,8 @@
 use std::collections::HashMap;
 use std::time::Duration;
 
-use chrono::Local;
+use chrono::Utc;
+use chrono_tz::Tz;
 use lazy_static::lazy_static;
 use rsteam::steam_user::Summary;
 use rsteam::SteamID;
@@ -35,7 +36,8 @@ async fn check() {
             let current_game_info = current_summary.game_info.clone().unwrap_or_else(|| "".to_string());
 
             if previous_game_info != current_game_info {
-                let time = Local::now().format("%Y-%m-%d %H:%M").to_string();
+                let timezone: Tz = CONFIG.read().await.timezone.parse().expect("Invalid timezone");
+                let time = Utc::now().with_timezone(&timezone).format("%Y-%m-%d %H:%M").to_string();
                 if current_game_info.is_empty() {
                     send_message(current_summary.profile_name.as_str(), &format!("stopped playing {} on {}", previous_game_info, time), 0xd92121).await;
                 } else {
