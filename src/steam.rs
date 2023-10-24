@@ -39,9 +39,9 @@ async fn check() {
                 let timezone: Tz = CONFIG.read().await.timezone.parse().expect("Invalid timezone");
                 let time = Utc::now().with_timezone(&timezone).format("%Y-%m-%d %H:%M").to_string();
                 if current_game_info.is_empty() {
-                    send_message(&format!("{} | {}", current_summary.profile_name, previous_game_info),  &format!("stopped playing on {}", time), 0xd92121).await;
+                    send_message(&format!("{}  |  {}", current_summary.profile_name, previous_game_info),  &format!("stopped playing on {}", time), 0xd92121).await;
                 } else {
-                    send_message(&format!("{} | {}", current_summary.profile_name, current_game_info),  &format!("started playing on {}", time), 0xd92121).await;
+                    send_message(&format!("{}  |  {}", current_summary.profile_name, current_game_info),  &format!("started playing on {}", time), 0x32cd32).await;
                 }
             }
         }
