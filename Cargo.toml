@@ -1,0 +1,19 @@
+[package]
+name = "kaixu-helper"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serenity = {version = "0.11.6", default-features = false, features = ["client", "gateway", "rustls_backend", "model"]}
+tokio = { version = "1.33.0", features = ["macros", "rt-multi-thread"] }
+rsteam = "0.1.4"
+poise = "0.5.6"
+serde = "1.0.189"
+serde_yaml = "0.9.25"
+lazy_static = "1.4.0"
+chrono = "0.4.31"
+regex = "1.10.2"
+shuttle-runtime = "0.29.0"
+shuttle-static-folder = "0.28.0"
