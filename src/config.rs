@@ -24,8 +24,7 @@ pub(crate) struct Config {
 lazy_static! {
     pub(crate) static ref CONFIG: RwLock<Config> = {
         if fs::metadata(CONFIG_NAME).is_ok() {
-                    let contents = fs::read_to_string(CONFIG_NAME)
-            .expect("Could not read config");
+            let contents = fs::read_to_string(CONFIG_NAME).expect("Could not read config");
             let config: Config = serde_yaml::from_str(&contents).expect("Error parsing config");
             return RwLock::new(config);
         }

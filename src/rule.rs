@@ -17,7 +17,7 @@ impl ReplyRule {
                 Err(_) => {
                     println!("Invalid regex: {}", self.rule);
                     false
-                },
+                }
             },
             "author_name" => msg.author.name == self.rule,
             "author_id" => msg.author.id.to_string() == self.rule,
