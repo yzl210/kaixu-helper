@@ -21,6 +21,7 @@ impl ReplyRule {
             },
             "author_name" => msg.author.name == self.rule,
             "author_id" => msg.author.id.to_string() == self.rule,
+
             _ => {
                 println!("Invalid rule type: {}", self.rule_type);
                 false
