@@ -40,11 +40,12 @@ async fn check() {
             let time = Utc::now().with_timezone(&timezone).format("%Y-%m-%d %H:%M").to_string();
             if previous_game_info != current_game_info {
                 if current_game_info.is_empty() {
-                    send_message(&format!("{}  |  {}", current_summary.profile_name, previous_game_info),  &format!("stopped playing on {}", time), 0xd92121).await;
+                    send_message(&format!("{}  |  {}", current_summary.profile_name, previous_game_info),  &format!("Stopped Playing\n{}", time), 0xd92121).await;
                 } else {
-                    send_message(&format!("{}  |  {}", current_summary.profile_name, current_game_info),  &format!("started playing on {}", time), 0x32cd32).await;
+                    send_message(&format!("{}  |  {}", current_summary.profile_name, current_game_info),  &format!("Started Playing\n{}", time), 0x32cd32).await;
                 }
             }
+
 
             let previous_status = status(&previous_summary.status);
             let current_status = status(&current_summary.status);
@@ -83,7 +84,12 @@ async fn check() {
                 }
 
                 send_message(&format!("{}  |  {}", current_summary.profile_name, status_msg),  &time, color).await;
+            }
 
+            let previous_name = &previous_summary.profile_name;
+            let current_name = &current_summary.profile_name;
+            if previous_name != current_name {
+                send_message(&format!("{}  |  Name Change", previous_name),  &format!("{}  ->  {}\n{}", previous_name, current_name, &time), 0x32cd32).await;
             }
 
         }
