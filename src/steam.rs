@@ -54,7 +54,7 @@ async fn check() {
                 let mut status_msg = "";
                 let mut color: u32 = 0xffffff;
 
-                if previous_status == status(&Status::Online) && current_status == status(&Status::Offline) {
+                if current_status == status(&Status::Offline) {
                     status_msg = "Offline";
                     color = 0x656566;
                 }
