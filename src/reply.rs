@@ -24,8 +24,18 @@ impl EventHandler for Handler {
 
         for rule in CONFIG.read().await.reply_rules.iter() {
             if rule.check(&msg) {
-                if let Err(why) = msg.reply(&ctx.http, rule.reply.as_str()).await {
-                    println!("Error sending message: {:?}", why);
+                let mut first = true;
+                for s in rule.reply.as_str().split("\n\n") {
+                    if first {
+                        if let Err(why) = msg.reply(&ctx.http, s).await {
+                            println!("Error sending message: {:?}", why);
+                        }
+                        first = false;
+                    } else {
+                        if let Err(why) = msg.channel_id.say(&ctx.http, s).await {
+                            println!("Error sending message: {:?}", why);
+                        }
+                    }
                 }
             }
         }
